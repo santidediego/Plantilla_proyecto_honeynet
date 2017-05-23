@@ -389,7 +389,7 @@
 
 
 % correct bad hyphenation here
-\hyphenation{op-tical net-works semi-conduc-tor}
+%\hyphenation{op-tical net-works semi-conduc-tor}
 
 
 \begin{document}
@@ -484,7 +484,7 @@ The purposes of this work are to identify and classify several samples of malwar
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Security, honeypots, honeynet, malware, traffic analysis
+security, honeypot, honeynet, malware, traffic analysis
 \end{IEEEkeywords}
 
 
@@ -505,22 +505,25 @@ Security, honeypots, honeynet, malware, traffic analysis
 
 
 \section{Introducción}
-\IEEEPARstart{A}{ntes} del surgimiento de los honeypots, la seguridad era principalmente defensiva y se basaba en técnicas para parar a los atacantes. Existía mucha información sobre los elementos de un ataque tales como exploits, metodología del ataque… pero poca sobre los atacantes en sí. Por aquel entonces los administradores de sistemas no tenían ni tiempo ni los recursos necesarios para analizar todos los ataques. 
+\IEEEPARstart{A}{ntes} del surgimiento de los honeypots, la seguridad era principalmente defensiva y se basaba en técnicas para prevenir los ataques. Existía mucha información sobre los elementos de un ataque tales como exploits, metodología del ataque,... pero poca sobre los atacantes en sí. Por aquel entonces los administradores de sistemas no tenían ni el tiempo ni los recursos necesarios para analizar todos los ataques.
 \\\\
-En 1999 esto empezó a cambiar y se comenzó a estudiar también a los atacantes. Se desarrollaron los primeros dispositivos que se centraban en monitorizar los sistemas, lo que dio lugar al Honeypot Project. En algunos trabajos  (\cite{caracterizacion_atacantes} y \cite{caracterizacion_atacantes_2}) se emplea el uso de análisis de componentes principales para la caracterización de atacantes, mientras que otros (\cite{escala_atacantes}) se centran en elaborar una escala de clasificación de atacantes según su comportamiento.  Al principio los honeypots eran sistemas reales pero gracias a la virtualización, a lo largo de los años se fueron implementando soluciones más flexibles.
+Alrededor de 1999 la situación empezó a cambiar y se comenzó a estudiar también a los atacantes. Se desarrollaron los primeros dispositivos que se centraban la monitorización de sistemas, lo que dio lugar al {\it Honeypot Project}. Algunos trabajos, \cite{caracterizacion_atacantes} y \cite{caracterizacion_atacantes_2}, se utilizan análisis de componentes principales para la intentar caracterizar a los atacantes, mientras que otros, \cite{escala_atacantes}, se centran en elaborar una clasificación de atacantes según su comportamiento. Al principio los honeypots eran sistemas reales pero gracias a la virtualización, a lo largo de los años se fueron implementando soluciones más flexibles.
 \\\\
-Actualmente, constituyen una solución ampliamente utilizada para el análisis de los diversos factores que componen un ataque, por ejemplo algunos trabajos (\cite{practical_malware_analysis} y \cite{compiled_executables}) se centran en el análisis del malware, el primero de ellos proporciona un procedimiento genérico empleando análisis estático y dinámico para lidiar con esta problemática, del cual se han aplicado algunas nociones para realizar el presente trabajo. Otros como \cite{ofuscation} se centran en explicar las técnicas más comunmente empleadas para la ofuscación del malware, a fin de dificultar su desensamblado.
+Actualmente, constituyen una solución ampliamente utilizada para el análisis de los diversos factores que componen un ataque. En \cite{practical_malware_analysis} y \cite{compiled_executables} se centran en el análisis del malware, el primero de ellos proporciona un procedimiento genérico empleando análisis estático y dinámico para lidiar con esta problemática, del cual se han aplicado algunas nociones para realizar el presente trabajo. Otros como \cite{ofuscation} se centran en explicar las técnicas más comunes empleadas para la ofuscación del malware, a fin de dificultar su desensamblado.
+
+\section{Clasificación de honeypots}
+Según su grado de interacción con el usuario podemos clasificarlos en honeypots de \textbf{baja}, \textbf{media} y \textbf{alta interacción}. Los más interesantes de cara a la obtención de información son los últimos, pero también son los que requieren de mayor esfuerzo para su utilización ya que el grado de automatización de los mismos suele ser menor.
 \\\\
-Según su interacción con el usuario podemos clasificarlos en honeypots de \textbf{baja, media o alta interacción}. Los más interesantes de cara a la obtención de información son los últimos, pero también son los más complicados de gestionar.
-\\\\
-Podemos colocar un honeypot en tres posiciones distintas principalmente:
+Otro método de clasificación de honeypots hace referencia a su colocación con respecto al cortafuegos de la red. De esta forma podemos colocar un honeypot en tres posiciones:
+
 \begin{itemize}
-\item\textbf{Detrás del firewall:} en esta posición se encuentra protegido por las reglas de filtrado del firewall y por tanto deberemos configurar este para que no bloquee ataques del exterior. Tiene la ventaja de que permite detectar ataques internos, además de la posibilidad de comprometer la red interna.
-\item \textbf{Delante del firewall:} en esta posición se encuentra expuesto directamente a internet por lo que no es necesario configurar el firewall. Por contra, tiene la desventaja de que no permite detectar ataques internos.
-\item \textbf{En una zona desmilitarizada:} el honeypot se encuentra en una zona donde se encuentran los servidores pero separada de la red interna. De esta forma permite recibir ataques tanto internos como externos sin comprometer la red interna. Tiene la desventaja de que será necesario también configurar el firewall.
+	\item \textbf{Detrás} del cortafuegos: en esta posición se encuentra protegido por las reglas de filtrado del cortafuegos y por tanto deberemos configurar este para que no bloquee ataques del exterior. Tiene la ventaja de que permite detectar ataques internos, además de la posibilidad de comprometer la red interna.
+	\item \textbf{Delante} del cortafuegos: en esta posición se encuentra expuesto directamente a Internet por lo que si es necesario configurar un cortafuegos propio. Por contra, tiene la desventaja de que no permite detectar ataques internos.
+	\item \textbf{En la zona desmilitarizada:} el honeypot se encuentra en una zona donde se encuentran los servidores pero separada de la red interna. De esta forma permite recibir ataques tanto internos como externos sin comprometer la red interna. Tiene la desventaja de que será necesario también configurar un cortafuegos propio.
 \end{itemize}
+
 \section{Escenario}
-En este trabajo se han desplegado dos honepots de baja/media interacción, Kippo y Glastopf, en una posición delante del firewall a fin de poder recibir ataques procedentes del exterior. Para este propósito se han empleado dos dispositivos del tipo Raspberry Pi 3, uno de ellos con sistema operativo Raspbian y el otro con sistema operativo Honeeepi, una distribución especial que viene con varios honeypots preinstalados, lo cual facilita enormemente la labor de configuración. Se ha prestado especial atención a las medidas de seguridad de la honeynet a fin de no comprometer la red de la UGR, ya que al ser dispositivos vulnerables por definición y además el objetivo es que sean atacados, este punto es crucial.
+En este trabajo se han desplegado dos honepots de baja/media interacción, Kippo y Glastopf, en una posición delante del cortafuegos a fin de poder recibir ataques procedentes del exterior. Para este propósito se han empleado dos dispositivos del tipo Raspberry Pi 3, uno de ellos con sistema operativo Raspbian y el otro con sistema operativo Honeeepi, una distribución especial que viene con varios honeypots preinstalados, lo cual facilita enormemente la labor de configuración. Se ha prestado especial atención a las medidas de seguridad de la honeynet a fin de no comprometer la red de la UGR, ya que al ser dispositivos vulnerables por definición y además el objetivo es que sean atacados, este punto es crucial.
 \\\\
 Para el análisis de las muestras de malware se han empleado máquinas virtuales con la misma arquitectura que el objetivo de las muestras, las cuales veremos en la sección correspondiente. Posteriormente, se ha procedido a la eliminación de dichas máquinas virtuales.
 \section{Resultados obtenidos en el nodo Kippo}
@@ -545,7 +548,7 @@ Por si fuera poco, se ha grabado las sesiones de los atacantes una vez entraban 
 Además hemos encontrado un patrón común a todos ellos:
 \begin{enumerate}
 \item El atacante accede al sistema por el puerto 22
-\item Desactiva las reglas de filtrado del firewall
+\item Desactiva las reglas de filtrado del cortafuegos
 \item Descarga un fichero de una dirección IP remota
 \item Ejecuta el fichero mediante el comando nohup, de forma que la ejecución continue cuando salga de la sesión
 \end{enumerate}
