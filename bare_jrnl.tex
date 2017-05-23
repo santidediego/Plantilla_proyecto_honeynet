@@ -408,10 +408,10 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Santiago de Diego,~\IEEEmembership{Estudiante UGR}
-        Gustavo Romero,~\IEEEmembership{Profesor UGR}
-\thanks{Santiago de Diego es estudiante del doble grado en matemáticas e ingeniería informática por la Universidad de Granada}% <-this % stops a space
-\thanks{Gustavo Romero es profesor en la Universidad de Granada, en el departamento de Arquitectura y Tecnología de los Computadores}}
+\author{Santiago de Diego,~\IEEEmembership{Estudiante, UGR}
+        Gustavo Romero,~\IEEEmembership{Profesor, UGR}
+\thanks{Santiago de Diego es estudiante del Doble Grado en Matemáticas e Ingeniería Informática por la Universidad de Granada}% <-this % stops a space
+\thanks{Gustavo Romero es profesor en la Universidad de Granada, en el Departamento de Arquitectura y Tecnología de los Computadores}}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -467,7 +467,7 @@
 
 \begin{abstract}
 %\boldmath
-In this project we deployed two different honeypots over Raspberry Pi devices in order to analyze attacks directed to the network of the University of Granada. We present here a brief resume of the results of the experiment.
+In this project we deployed two different honeypots over Raspberry Pi 3 devices in order to analyze attacks directed to the network of the University of Granada. We present here a brief resume of the results of the experiment.
 \\\\
 On the one hand, we have results from a Kippo honeypot related to brute force attacks from several IP directions, most of them coming from Asia. In addition we show the results of a malware analysis of samples obtained from Kippo.
 \\\\
@@ -507,9 +507,9 @@ security, honeypot, honeynet, malware, traffic analysis
 \section{Introducción}
 \IEEEPARstart{A}{ntes} del surgimiento de los honeypots, la seguridad era principalmente defensiva y se basaba en técnicas para prevenir los ataques. Existía mucha información sobre los elementos de un ataque tales como exploits, metodología del ataque,... pero poca sobre los atacantes en sí. Por aquel entonces los administradores de sistemas no tenían ni el tiempo ni los recursos necesarios para analizar todos los ataques.
 \\\\
-Alrededor de 1999 la situación empezó a cambiar y se comenzó a estudiar también a los atacantes. Se desarrollaron los primeros dispositivos que se centraban la monitorización de sistemas, lo que dio lugar al {\it Honeypot Project} \cite{honeynet.project}. Algunos trabajos, \cite{caracterizacion_atacantes} y \cite{caracterizacion_atacantes_2}, se utilizan análisis de componentes principales para la intentar caracterizar a los atacantes, mientras que otros, \cite{escala_atacantes}, se centran en elaborar una clasificación de atacantes según su comportamiento. Al principio los honeypots eran sistemas reales pero gracias a la virtualización, a lo largo de los años se fueron implementando soluciones más flexibles.
+Alrededor de 1999 la situación empezó a cambiar y se comenzó a estudiar también a los atacantes. Se desarrollaron los primeros dispositivos que se centraban la monitorización de sistemas, lo que dio lugar al {\it Honeypot Project} \cite{honeynet.project}. Algunos trabajos, \cite{almotairi2008characterization} y \cite{almotairi2009technique}, utilizan análisis de componentes principales para la intentar caracterizar a los atacantes, mientras que otros, \cite{salles2011characterizing}, se centran en elaborar una clasificación de atacantes según su comportamiento. Al principio los honeypots eran sistemas reales pero gracias a la virtualización, a lo largo de los años se fueron implementando soluciones más flexibles.
 \\\\
-Actualmente, constituyen una solución ampliamente utilizada para el análisis de los diversos factores que componen un ataque. En \cite{practical_malware_analysis} y \cite{compiled_executables} se centran en el análisis del malware, el primero de ellos proporciona un procedimiento genérico empleando análisis estático y dinámico para lidiar con esta problemática, del cual se han aplicado algunas nociones para realizar el presente trabajo. Otros como \cite{ofuscation} se centran en explicar las técnicas más comunes empleadas para la ofuscación del malware, a fin de dificultar su desensamblado.
+Actualmente, constituyen una solución ampliamente utilizada para el análisis de los diversos factores que componen un ataque. En \cite{kendall2007practical} y \cite{quist2009visualizing} se centran en el análisis del malware, el primero de ellos proporciona un procedimiento genérico empleando análisis estático y dinámico para lidiar con esta problemática, del cual se han aplicado algunas nociones para realizar el presente trabajo. Otros como \cite{ofuscation} se centran en explicar las técnicas más comunes empleadas para la ofuscación del malware, a fin de dificultar su desensamblado.
 
 \section{Clasificación de honeypots}
 Según su grado de interacción con el usuario podemos clasificarlos en honeypots de \textbf{baja}, \textbf{media} y \textbf{alta interacción}. Los más interesantes de cara a la obtención de información son los últimos, pero también son los que requieren de mayor esfuerzo para su utilización ya que el grado de automatización de los mismos suele ser menor.
@@ -527,7 +527,7 @@ En este trabajo se han desplegado dos honepots de baja/media interacción, Kippo
 \\\\
 Para el análisis de las muestras de malware se han empleado máquinas virtuales con la misma arquitectura que el objetivo de las muestras, las cuales veremos en la sección correspondiente. Posteriormente, se ha procedido a la eliminación de dichas máquinas virtuales.
 \section{Resultados obtenidos en el nodo Kippo}
-En este momento se han recibido \textbf{29342} ataques dirigidos al puerto 22, todos ellos con patrones muy similares ,ver Fig. 1. La mayoría de ellos proceden de China, y en menor medida de Polonia, Vietnam y Holanda. Sin embargo, a pesar de la enorme tasa de ataques, resulta sorprendente la poca tasa de éxito de los mismos, ya que solamente el \textbf{12.62\%} de los mismos ha resultado existoso. Este dato resulta aún más sorprendente si tenemos en cuenta que se han empleado credenciales de acceso realmente sencillas (admin-admin, root-root…).
+En este momento se han recibido \textbf{29342} ataques dirigidos al puerto 22, todos ellos con patrones muy similares ,ver Fig. 1. La mayoría de ellos proceden de China, y en menor medida de Polonia, Vietnam y Holanda. Sin embargo, a pesar de la enorme tasa de ataques, resulta sorprendente la poca tasa de éxito de los mismos, ya que solamente el \textbf{12.62\%} de los mismos ha resultado existoso. Este dato resulta aún más sorprendente si tenemos en cuenta que se han empleado credenciales de acceso realmente sencillas (admin-admin, root-root...).
 \begin{figure}[H]
 \centerline{
 \includegraphics[width=9.5cm]{img/pruebas_dia}
@@ -606,7 +606,7 @@ Las muestras recogidas son muy similares aunque con ligeras variaciones, como po
 \\\\
 Hemos descubierto que las muestras pertenecen a un tipo muy particular de malware chino, muy común y potencialmente dañino. Las muestras tienen funcionalidad de puerta trasera  y abren un puerto elegido aleatoriamente para conectarse a una IP remota. Además, se ha descubierto que son capaces de realizar ataques de denegación de servicio a otras máquinas una vez que han comprometido el host objetivo. Algo que nos ha llamado mucho la atención es que algunas muestras presentan información de depuración, por lo que nos hemos centrado en estas para poder obtener el máximo posible de información.
 \\\\
-Sospechamos que dichas muestras pueden pertenecer a la botnet \textit{BillGates}, calificada como de alto riesgo, a causa de las similitudes encontradas con otras muestras de malware de dicha botnet. Por ejemplo, un patrón en común es que todas ellas almacenan información en la librería \textit{/usr/libamplify.so} de sistemas Linux. Para realizar el análisis hemos empleado técnicas de ingeniería inversa, tales como el análisis estático y dinámico, todo ello en un entorno aislado y controlado. Si el lector quiere profundizar en estas tácticas de análisis, puede consultar \cite{know_your_enemy}, donde se proporcionan ejemplos y procedimientos para este fin.
+Sospechamos que dichas muestras pueden pertenecer a la botnet \textit{BillGates}, calificada como de alto riesgo, a causa de las similitudes encontradas con otras muestras de malware de dicha botnet. Por ejemplo, un patrón en común es que todas ellas almacenan información en la librería \textit{/usr/libamplify.so} de sistemas Linux. Para realizar el análisis hemos empleado técnicas de ingeniería inversa, tales como el análisis estático y dinámico, todo ello en un entorno aislado y controlado. Si el lector quiere profundizar en estas tácticas de análisis, puede consultar \cite{honeywell2004know}, donde se proporcionan ejemplos y procedimientos para este fin.
 \begin{figure}[H]
 \centerline{
 \includegraphics[width=8.8cm]{img/download_malware}
@@ -652,10 +652,11 @@ Las futuras ampliaciones del trabajo, ordenadas por prioridad son:
 \item Creación de nuevos nodos, con diferentes honeypots, algunos de ellos de alta interacción, a fin de obtener más información
 \item Empleo de técnicas de clasificación automática usando técnicas de inteligencia artificial
 \end{enumerate}
-\section*{Agradecimientos}
-Primero de todo, a mi tutor, Gustavo Romero del departamento de Arquitectura y  Tecnología de los Computadores, de la Universidad de Granada, por ayudarme en todo lo que ha podido y por recordarme conocimientos que había olvidado y han sido cruciales para el desarrollo de este proyecto. Por último pero no por ello menos importante, a mis padres por su constante apoyo y porque sin ellos nada de esto sería posible.
-% Can use something like this to put references on a page
-% by themselves when using endfloat and the captionsoff option.
+
+%\section*{Agradecimientos}
+%Primero de todo, a mi tutor, Gustavo Romero del departamento de Arquitectura y  Tecnología de los Computadores, de la Universidad de Granada, por ayudarme en todo lo que ha podido y por recordarme conocimientos que había olvidado y han sido cruciales para el desarrollo de este proyecto. Por último pero no por ello menos importante, a mis padres por su constante apoyo y porque sin ellos nada de esto sería posible.
+%% Can use something like this to put references on a page
+%% by themselves when using endfloat and the captionsoff option.
 \ifCLASSOPTIONcaptionsoff
   \newpage
 \fi
@@ -677,86 +678,18 @@ Primero de todo, a mi tutor, Gustavo Romero del departamento de Arquitectura y  
 % http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
 % The IEEEtran BibTeX style support page is at:
 % http://www.michaelshell.org/tex/ieeetran/bibtex/
-%\bibliographystyle{IEEEtran}
+\bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
-%\bibliography{IEEEabrv,../bib/paper}
-%
+\bibliography{IEEEabrv,bare_jrnl}
+
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
 % (used to reserve space for the reference number labels box)
-\begin{thebibliography}{1}
-
+%\begin{thebibliography}{1}
 %\bibitem{IEEEhowto:kopka}
 %H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
-  %0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
-
-\bibitem{web_honeypot} Lukas Rist, Sven Vetsch, Marcel Koßin, Michael Maue,
-\emph{A dynamic, low-interaction web application honeypot}. \hskip 1em plus
-  0.5em minus 0.4em\relax The Honeynet Project, 2010. Disponible en: \url{https://www.honeynet.org/sites/default/files/files/KYT-Glastopf-Final_v1.pdf}
-
-\bibitem{know_your_enemy} The honeypot project,
-\emph{Know your enemy: learning about security threats}, 2nd~ed.\hskip 1em plus
-  0.5em minus 0.4em
-\relax Addison-Wesley, 2004 
-
-\bibitem{virtual_honeypots} Niels Provos, Thorsten Holz,
-\emph{Virtual Honeypots : from botnet tracking to intrusion detection}, 1st~ed.\hskip 1em plus
-  0.5em minus 0.4em\relax Addison-Wesley, 2007.
-
-\bibitem{clas_malware} Peter Kálnai, Jaromír Hořejší,
-\emph{DDoS Trojan: A Malicious Concept that Conquered the ELF Format}. \hskip 1em plus
-  0.5em minus 0.4em\relax Virus Bulletin, 2016. Disponible en: \url{https://www.virusbulletin.com/virusbulletin/2016/06/vb2015-paper-ddos-trojan-malicious-concept-conquered-elf-format/}
-
-\bibitem{art_ampliacion} Mikhail Kuzinší,
-\emph{Versatile DDoS Trojan for Linux}. \hskip 1em plus
-  0.5em minus 0.4em\relax SecureList, 2014. Disponible en: \url{https://securelist.com/analysis/publications/64361/versatile-ddos-trojan-for-linux/}
-
-\bibitem{art_botnet_billgates} Akamai’s Security Intelligence Research Team,
-\emph{Threat Advisory: “BillGates” Botnet}.\hskip 1em plus
-  0.5em minus 0.4em\relax Akamai’s [state of the internet] / security, 2016. Disponible en: \url{https://www.akamai.com/kr/ko/multimedia/documents/state-of-the-internet/bill-gates-botnet-threat-advisory.pdf}
-
-\bibitem{ofuscation} Robbie Harwood and Maxime Serrano,
-\emph{Lecture 26: Obfuscation}. \hskip 1em plus
-  0.5em minus 0.4em\relax Carnegie Mellon University, 2013. Disponible en: \url{https://www.cs.cmu.edu/~fp/courses/15411-f13/lectures/26-obfuscation.pdf}
-
-\bibitem{tracking_hackers} Lance Spitzner,
-\emph{Honeypots: tracking hackers}, 1st~ed.\hskip 1em plus
-  0.5em minus 0.4em
-  \relax Addison-Wesley, 2002.
-
-\bibitem{information_security} R.C. Joshi, Anjali Sardana,
-\emph{Honeypots:A New Paradigm to Information Security}.\hskip 1em plus
-  0.5em minus 0.4em
-  \relax CRC Press, 2011
-
-
-\bibitem{caracterizacion_atacantes} S. Almotairi, A. Clark, G. Mohay, and J. Zimmermann,
-\emph{Characterization of Attackers’ Activities in Honeypot Traffic Using Principal Component Analysis}. \hskip 1em plus
-  0.5em minus 0.4em
-  \relax IFIP International Conference on Network and Parallel Computing, 2008.
-
-\bibitem{caracterizacion_atacantes_2}S. Almotairi, A. Clark, G. Mohay, and J. Zimmermann,
-\emph{A Technique for Detecting New Attacks in Low-Interaction Honeypot Traffic}. \hskip 1em plus
-  0.5em minus 0.4em
-  \relax  Fourth International Conference on Internet Monitoring and Protection, 2009
-
-\bibitem{escala_atacantes}Gabriel Salles-Loustau, Robin Berthier, Etienne Collange, Bertrand Sobesto, and Michel Cukier,
-\emph{Characterizing Attackers and Attacks: An Empirical Study}.\hskip 1em plus
-  0.5em minus 0.4em
-  \relax 17th IEEE Pacific Rim International Symposium on Dependable Computing, 2011.
-
-\bibitem{practical_malware_analysis} Kris Kendall,
-\emph{Practical malware analysis}. \hskip 1em plus
-  0.5em minus 0.4em
-  \relax 17th IEEE Pacific Rim International Symposium on Dependable Computing, 2011.
-  
-\bibitem{compiled_executables}Quist, Daniel A. Liebrock, Lorie M.,
-\emph{Visualizing compiled executables for malware analysis}. \hskip 1em plus
-  0.5em minus 0.4em
-  \relax 6th International Workshop on Visualization for Cyber Security, 2009.
-
-\end{thebibliography}
-
+%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+%\end{thebibliography}
 
 \end{document}
 

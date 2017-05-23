@@ -9,3 +9,4 @@ Imprescindibles 3 citas:
 Por cierto... ¿el proyecto famoso se llama honeypot o honeynet? Al que haces referencia en la introducción... creo que es este: http://www.honeynet.org/project pero no estoy seguro
 
 deberíamos pasar la bibliografía a un fichero aparte... yo te ayudo :)
+
