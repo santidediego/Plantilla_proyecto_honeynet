@@ -524,13 +524,13 @@ En este trabajo se han desplegado dos honepots de baja/media interacción, Kippo
 \\\\
 Para el análisis de las muestras de malware se han empleado máquinas virtuales con la misma arquitectura que el objetivo de las muestras, las cuales veremos en la sección correspondiente. Posteriormente, se ha procedido a la eliminación de dichas máquinas virtuales.
 \section{Resultados obtenidos en el nodo Kippo}
-En este momento se han recibido \textbf{29342} ataques dirigidos al puerto 22, todos ellos con patrones muy similares ,ver Fig. 1. La mayoría de ellos proceden de China, y en menor medida de Polonia, Vietnam y Holanda. Sin embargo, a pesar de la enorme tasa de ataques, resulta sorprendente la poca tasa de éxito de los mismos, ya que solamente el \textbf{12.62\%} de los mismos ha resultado existoso. Este dato resulta aún más sorprendente si tenemos en cuenta que se han empleado credenciales de acceso realmente sencillas (admin-admin, root-root…).
+En este momento se han recibido \textbf{29342} ataques dirigidos al puerto 22, todos ellos con patrones muy similares ,ver Fig. \ref{fig:pruebas_dia}. La mayoría de ellos proceden de China, y en menor medida de Polonia, Vietnam y Holanda. Sin embargo, a pesar de la enorme tasa de ataques, resulta sorprendente la poca tasa de éxito de los mismos, ya que solamente el \textbf{12.62\%} de los mismos ha resultado existoso. Este dato resulta aún más sorprendente si tenemos en cuenta que se han empleado credenciales de acceso realmente sencillas (admin-admin, root-root…).
 \begin{figure}[H]
 \centerline{
 \includegraphics[width=9.5cm]{img/pruebas_dia}
 }
 \caption{Pruebas por día}
-\label{fig:pruebas_diarias}
+\label{fig:pruebas_dia}
 \end{figure}
 En la imagen puede verse un incremento repentino cerca del 22 de Diciembre, que seguramente haya sido debido a que en esa fecha es cuando se terminó de ocultar el honeypot como tal, de forma que ya simulaba ser un servidor real. Además, al principio el servidor no era muy conocido pero en unas pocas semanas pudimos comprobar como apareció en el buscador \textit{Shodan} y por tanto era lógico esperar que el número de ataques recibidos se incrementase enormemente desde entonces.
 \\\\
@@ -540,7 +540,7 @@ Por si fuera poco, se ha grabado las sesiones de los atacantes una vez entraban 
 \includegraphics[width=9cm]{img/session}
 }
 \caption{Sesión grabada de un atacante}
-\label{fig:sesion_atacante}
+\label{fig:session}
 \end{figure}
 Además hemos encontrado un patrón común a todos ellos:
 \begin{enumerate}
@@ -551,21 +551,21 @@ Además hemos encontrado un patrón común a todos ellos:
 \end{enumerate}
 A raíz del análisis de estos logs, se ha descubierto además que los atacantes siempre realizan acciones similares sin tener en cuenta la situación, por ejemplo, es común ver como un atacante intenta ejecutar un fichero que no ha sido descargado correctamente, o incongruencias similares (ver imagen anterior) y por tanto tenemos otro indicio de que los ataques son realmente automatizados.
 \\\\
-Además se ha procedido a clasificar a los atacantes por países, a fin de poder realizar estadísticas. Por ejemplo, podemos ver en la Fig. 3 una lista de los 10 países más beligerantes, de forma que se puede obtener una clasificación por países de los ataques recibidos.
+Además se ha procedido a clasificar a los atacantes por países, a fin de poder realizar estadísticas. Por ejemplo, podemos ver en la Fig. \ref{fig:country_profiling} una lista de los 10 países más beligerantes, de forma que se puede obtener una clasificación por países de los ataques recibidos.
 \begin{figure}[H]
 \centerline{
 \includegraphics[width=8.8cm]{img/country_profiling}
 }
 \caption{Evaluación por paises}
-\label{fig:sesion_atacante}
+\label{fig:country_profiling}
 \end{figure}
-Otra información útil puede ser ver qué clientes ssh han sido los más utilizados en los ataques, ya que esto puede ayudar a establecer clasificaciones de los diferentes atacantes según el tipo de máquina o sistema operativo que utilicen. Podemos ver también una clasificación de los 10 clientes más utilizados en la figura 4:
+Otra información útil puede ser ver qué clientes ssh han sido los más utilizados en los ataques, ya que esto puede ayudar a establecer clasificaciones de los diferentes atacantes según el tipo de máquina o sistema operativo que utilicen. Podemos ver también una clasificación de los 10 clientes más utilizados en la figura \ref{fig:ssh}:
 \begin{figure}[H]
 \centerline{
 \includegraphics[width=8.8cm]{img/ssh}
 }
 \caption{Top 10 clientes ssh }
-\label{fig:sesion_atacante}
+\label{fig:ssh}
 \end{figure}
 \section{Resultados obtenidos en el nodo Glastopf}
 Centrándonos ahora en Glastopf, hemos recibido numerosos ataques del tipo inyección SQL, así como búsqueda de los ficheros \textit{robots.txt} o \textit{sitemap.xml}, ambos de ellos conocidos por contener información valiosa sobre la estructura de un sitio web. Además hemos encontrado varias pruebas hacia la ruta \textit{/wp-login.php}, debido a que el atacante ha debido creer que tenemos un \textit{wordpress} funcionando en el servidor y ha tratado de localizar el login.
@@ -588,13 +588,13 @@ Se han encontrado varias cadenas de este tipo y todas ellas presentan un patrón
 \item Descarga un binario malicioso de una dirección IP
 \item Le asigna los permisos necesarios y lo ejecuta
 \end{enumerate}
-Además hemos observado que el origen de los ataques es, a diferencia de en Kippo, bastante diverso. Podemos encontrar ataques de países muy diferentes, como podemos observar en la figura 5. Se han empleado para el experimento 865 muestras, en lugar del enorme número de ataques registrados en Kippo. Esto es debido a que el ratio de ataques es mucho más bajo en el protocolo HTTP que en el SSH, debido a el tipo de explotación, ya que la segunda se presta más a su automatización por script kiddies1 que la primera.
+Además hemos observado que el origen de los ataques es, a diferencia de en Kippo, bastante diverso. Podemos encontrar ataques de países muy diferentes, como podemos observar en la figura \ref{fig:glastopf}. Se han empleado para el experimento 865 muestras, en lugar del enorme número de ataques registrados en Kippo. Esto es debido a que el ratio de ataques es mucho más bajo en el protocolo HTTP que en el SSH, debido a el tipo de explotación, ya que la segunda se presta más a su automatización por script kiddies que la primera.
 \begin{figure}[H]
 \centerline{
 \includegraphics[width=8.8cm]{img/glastopf}
 }
 \caption{Número de ataques por día hacia Glastopf}
-\label{fig:sesion_atacante}
+\label{fig:glastopf}
 \end{figure}
 \section{Análisis de las muestras de malware obtenidas}
 En esta sección analizaremos las diferentes muestras de malware que hemos obtenido mediante el nodo Kippo. Para tal fin se han empleado herramientas tanto manuales como automatizadas (objdump, gdb, radare, API de VirusTotal…).
@@ -609,17 +609,17 @@ Sospechamos que dichas muestras pueden pertenecer a la botnet \textit{BillGates}
 \includegraphics[width=8.8cm]{img/download_malware}
 }
 \caption{Descarga de malware desde uno de los honeypots}
-\label{fig:sesion_atacante}
+\label{fig:download_malware}
 \end{figure}
 Analizando la entropía de los binarios con radare hemos descubierto que no han sido encriptados, ya que dicha entropía es menor del \textbf{60\%}. Las muestras son bastante indetectables, ya que todas ellas fueron subidas a VirusTotal utilizando un script en Python y solamente cerca del \textbf{15\%} de los antivirus las detectaban como malware.
 \\\\
-Hemos descubierto varias funciones y variables que nos han permitido afianzar nuestras sospechas sobre el comportamiento del malware. Podemos ver una captura de las funciones de una de las muestras, extraídas con ddd en la Fig. 7:
+Hemos descubierto varias funciones y variables que nos han permitido afianzar nuestras sospechas sobre el comportamiento del malware. Podemos ver una captura de las funciones de una de las muestras, extraídas con ddd en la Fig. \ref{fig:ddd}.
 \begin{figure}[H]
 \centerline{
 \includegraphics[width=8.5cm]{img/ddd}
 }
 \caption{Funciones empleadas por una de las muestras de malware}
-\label{fig:sesion_atacante}
+\label{fig:ddd}
 \end{figure}
 Algunas herramientas de línea de comandos permiten recuperar este tipo de información por separado, como pueden ser file, strings o strace y pueden ser muy útiles para complementar la información obtenida examinando el código ensamblador. Un examen más exhaustivo del código, como mencionábamos anteriormente, revela funcionalidad de DOS. Podemos encontrar varias cadenas relacionadas con este tipo de ataque como son:
 \begin{itemize}
@@ -637,7 +637,7 @@ Un ejemplo de análisis dinámico corrobora que las muestras de malware son comp
 \includegraphics[width=8.9cm]{img/netstat}
 }
 \caption{Malware \textbf{z} conectándose con una IP remota}
-\label{fig:sesion_atacante}
+\label{fig:netstat}
 \end{figure}
 \section{Conclusiones y trabajo futuro}
 La principal conclusión que podemos extraer es que es esencial asegurar nuestros sistemas, ya que, aunque no somos conscientes, estamos recibiendo ataques constantemente. Además los atacantes disponen de mucho más tiempo y recursos que nosotros por lo que no debemos subestimarlos. Por tanto es imprescindible el sentido común para evitar ataques de ingeniería social, además de una sólida política de seguridad ya que, como hemos visto, la mayoría de los ataques son automatizados y pueden ser evitados. Enfatizamos en el empleo de contraseñas seguras y en evitar el uso de configuraciones “por defecto” para prevenir este tipo de ataques.
