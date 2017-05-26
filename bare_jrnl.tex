@@ -97,7 +97,7 @@
 
 
 
-
+\usepackage{tabulary}
 
 
 % *** CITATION PACKAGES ***
@@ -536,9 +536,9 @@ Para el análisis de las muestras de malware se han empleado máquinas virtuales
 
 En este momento se han recibido \textbf{29342} ataques dirigidos al puerto 22, todos ellos con patrones muy similares, ver Figura \ref{fig:pruebas_dia}. La mayoría de ellos proceden de China, y en menor medida de Polonia, Vietnam y Holanda. Sin embargo, a pesar de la enorme tasa de ataques, resulta sorprendente la poca tasa de éxito de los mismos, ya que solamente el \textbf{12.62\%} de los mismos ha resultado existoso. Este dato resulta aún más sorprendente si tenemos en cuenta que se han empleado credenciales de acceso realmente sencillas (admin/admin, root/root,...).
 
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.5\textwidth]{img/pruebas_dia}
+\includegraphics[width=0.4\textwidth]{img/pruebas_dia}
 \caption{Intentos de penetración contabilizados por días}
 \label{fig:pruebas_dia}
 \end{figure}
@@ -547,7 +547,7 @@ En la imagen puede verse un incremento repentino cerca del 22 de Diciembre, que 
 
 Por si fuera poco, se han grabado las sesiones de los atacantes una vez entraban en el honeypot, a fin de poder descubrir patrones en su comportamiento. Uno de los patrones más frecuentemente observado es que todos ellos escribían a gran velocidad, así como que no cometían errores de escritura, por lo que es seguro que emplearon scripts automatizados para realizar los ataques. Podemos ver una de estas sesiones en la siguiente imagen:
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{img/session}
 \caption{Sesión grabada de un atacante}
@@ -566,7 +566,7 @@ A raíz del análisis de estos registros se ha descubierto, además, que los ata
 
 Además se ha procedido a clasificar a los atacantes por países a fin de poder realizar una estadística. En la Figura \ref{fig:country_profiling} podemos ver una lista de los 10 países más beligerantes, de forma que se puede obtener una clasificación por países de los ataques recibidos.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{img/country_profiling}
 \caption{Clasificación de paises origen de los ataques.}
@@ -575,7 +575,7 @@ Además se ha procedido a clasificar a los atacantes por países a fin de poder 
 
 Otra información útil puede ser ver qué clientes {\tt ssh} han sido los más utilizados en los ataques, ya que esto puede ayudar a establecer clasificaciones de los diferentes atacantes según el tipo de máquina o sistema operativo que utilicen. Podemos ver también una clasificación de los 10 clientes más utilizados en la figura \ref{fig:ssh}:
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{img/ssh}
 \caption{Lista de los 10 clientes {\tt ssh} más comunmente empleados.}
@@ -610,7 +610,7 @@ Se han encontrado varias cadenas de este tipo y todas ellas presentan un patrón
 
 Además hemos observado que el origen de los ataques es, a diferencia de en Kippo, bastante diverso. Podemos encontrar ataques de países muy diferentes, como podemos observar en la figura \ref{fig:glastopf}. Se han recopilado en el experimento 865 muestras, un número mucho menor que la enorme cantidad de ataques registrados en Kippo. Esto es debido a que el ratio de ataques es mucho más bajo en el protocolo HTTP que en el SSH, debido a el tipo de explotación, ya que la segunda se presta más a su automatización por parte de {\it script kiddies}~\footnote{termino despectivo apliacable a atacantes con poca experiencia} que la primera.
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{img/glastopf}
 \caption{Número de ataques por día hacia Glastopf}
@@ -622,20 +622,34 @@ Además hemos observado que el origen de los ataques es, a diferencia de en Kipp
 \section{Análisis del malware recopilado}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-En esta sección analizaremos las diferentes muestras de malware que hemos obtenido mediante el nodo Kippo. Para tal fin se han empleado tanto herramientas manuales como automáticas: {\tt objdump}, {\tt gdb}, {\tt radare} y la API de VirusTotal, entre otros.
+En esta sección analizaremos las diferentes muestras de malware que hemos obtenido mediante el nodo Kippo. Para tal fin se han empleado tanto herramientas manuales como automáticas: {\tt objdump}, {\tt gdb}, {\tt radare} y la API de VirusTotal, entre otros. Las muestras recogidas son muy similares aunque con ligeras variaciones, como la IP a la que se conectan. Podemos ver las características de las principales muestras en la siguiente tabla:
 
-Las muestras recogidas son muy similares aunque con ligeras variaciones, como por ejemplo la IP a la que se conectan. La mayoría de ellas son binarios de tipo ELF~\footnote{Executable and Linkable Format} y están escritas en C o C++ para arquitectura x86. Su objetivo es el sistema operativo Linux. Aunque la mayoría de las muestras de malware recopiladas tienen como objetivo la arquitectura 8086, también han llegado algunas para MIPS R3000.
-
+\begin{table}[H]
+\centering
+\begin{tabulary}{9.2cm}{| CCCCCCCC |}
+\hline 
+Muestra & Arq & SO  & Procesador & Tipo& Lenguaje & Depuración & Enlazado   \\ 
+\hline 
+Z & 32 bits & Linux & Intel 80386 & ELF & C++ & Sí & Estático\\ 
+\hline 
+Pomo & 32 bits & Linux  & Intel 80386 & ELF & C & No & Estático\\ 
+\hline 
+Udp26 & 32 bits & Linux & Intel 80386 & ELF & C++ & No & Estático\\ 
+\hline 
+Syn26 & 32 bits & Linux & Intel 80386 & ELF & C++ & Sí & Estático\\ 
+\hline 
+Wrt & 32 bits & Linux & MIPS R3000 & ELF & C++ & Sí & Estático\\ 
+\hline 
+Xudp & 32 bits & Linux & Intel 80386 & ELF & C & Sí & Estático\\ 
+\hline 
+Mips & 32 bits & Linux & MIPS R300 & ELF & C++ & Sí & Estático\\ 
+\hline 
+\end{tabulary}
+\caption{Características de las principales muestras}
+\end{table}
 Hemos descubierto que las muestras pertenecen a un tipo muy particular de malware de origen chino, muy común y potencialmente dañino. Las muestras tienen funcionalidad de puerta trasera y abren un puerto elegido aleatoriamente para conectarse a una IP remota. Además, se ha descubierto que son capaces de realizar ataques de denegación de servicio a terceras máquinas una vez comprometido el ordnador atacado. Algo que nos ha llamado mucho la atención es que algunas muestras presentan información de depuración, por lo que nos hemos centrado en estas para poder obtener el máximo posible de información y de una manera más sencilla.
 
 Sospechamos que dichas muestras pueden pertenecer a la botnet \textit{BillGates}, calificada como de alto riesgo, a causa de las similitudes encontradas con otras muestras de malware de dicha botnet. Por ejemplo, un patrón en común es que todas ellas almacenan información en la biblioteca {\tt /usr/libamplify.so} de Linux. Para realizar el análisis hemos empleado técnicas de ingeniería inversa, tales como el análisis estático y dinámico, todo ello en un entorno aislado y controlado. Si el lector quiere profundizar en estas tácticas de análisis, puede consultar \cite{honeywell2004know}, donde se proporcionan ejemplos y procedimientos para este fin.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{img/download_malware}
-\caption{Descarga de malware desde uno de los honeypots}
-\label{fig:download_malware}
-\end{figure}
 
 Analizando la entropía de los binarios con {\tt radare} hemos descubierto que no han sido encriptados, ya que dicha entropía es menor del \textbf{60\%}. Las muestras son bastante indetectables, ya que todas ellas fueron subidas a VirusTotal utilizando un script en Python y solamente cerca del \textbf{15\%} de los antivirus las detectaban como malware.
 
@@ -694,7 +708,7 @@ CAttackUdp
 
 El análisis dinámico corrobora que las muestras de malware son completamente funcionales y hacen lo que se espera de ellas. A modo de ejemplo, en la última línea de la imagen podemos ver la conexión con una ip desconocida:
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.5\textwidth]{img/netstat}
 \caption{Malware {\bf z} conectándose con una IP remota}
