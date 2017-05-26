@@ -642,7 +642,7 @@ Analizando la entropía de los binarios con {\tt radare} hemos descubierto que n
 Hemos descubierto varias funciones y variables que nos han permitido afianzar nuestras sospechas sobre el comportamiento del malware. Podemos ver una captura de las funciones de una de las muestras, extraídas con {\tt nm} en la Figura \ref{fig:nm}.
 
 \begin{figure}
-\begin{lstlisting}[basicstyle=\footnotesize\ttfamily]
+\begin{lstlisting}[basicstyle=\small\ttfamily]
 08076cdc T CSysTool::CheckGatesType
 08076222 T CSysTool::CloseAllFileDescs
 08076250 T CSysTool::CloseResources
@@ -677,17 +677,20 @@ Hemos descubierto varias funciones y variables que nos han permitido afianzar nu
 \label{fig:nm}
 \end{figure}
 
-Algunas herramientas de línea de comandos permiten recuperar este tipo de información por separado, como pueden ser {\tt file}, {\tt strings} o {\tt strace} y pueden ser muy útiles para complementar la información obtenida examinando el código ensamblador. Un examen más exhaustivo del código, como mencionábamos anteriormente, revela funcionalidad de Denegación de Servicio. Podemos encontrar varias cadenas relacionadas con este tipo de ataque como son:
+Algunas herramientas de línea de comandos permiten recuperar este tipo de información por separado, como pueden ser {\tt file}, {\tt strings} o {\tt strace} y pueden ser muy útiles para complementar la información obtenida examinando el código ensamblador. Un examen más exhaustivo del código, como mencionábamos anteriormente, revela funcionalidad de Denegación de Servicio. Podemos encontrar varias cadenas posiblemente relacionadas con este tipo de ataque como son:
 
-\begin{itemize}
-\item \texttt{AttackBase}
-\item \texttt{PacketAttack}
-\item \texttt{AttackUDP}
-\item \texttt{AttackSyn}
-\item \texttt{AttackICMP}
-\item \texttt{AttackDNS}
-\item \texttt{Tcpattack}
-\end{itemize}
+\begin{lstlisting}[basicstyle=\small\ttfamily]
+CAttackAmp
+CAttackBase
+CAttackCc
+CAttackCompress
+CAttackDns
+CAttackIcmp
+CAttackIe
+CAttackPrx
+CAttackSyn
+CAttackUdp
+\end{lstlisting}
 
 El análisis dinámico corrobora que las muestras de malware son completamente funcionales y hacen lo que se espera de ellas. A modo de ejemplo, en la última línea de la imagen podemos ver la conexión con una ip desconocida:
 
