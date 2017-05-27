@@ -97,7 +97,7 @@
 
 
 
-\usepackage{tabulary}
+\usepackage{tabular}
 
 
 % *** CITATION PACKAGES ***
@@ -622,31 +622,25 @@ Además hemos observado que el origen de los ataques es, a diferencia de en Kipp
 \section{Análisis del malware recopilado}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-En esta sección analizaremos las diferentes muestras de malware que hemos obtenido mediante el nodo Kippo. Para tal fin se han empleado tanto herramientas manuales como automáticas: {\tt objdump}, {\tt gdb}, {\tt radare} y la API de VirusTotal, entre otros. Las muestras recogidas son muy similares aunque con ligeras variaciones, como la IP a la que se conectan. Podemos ver las características de las principales muestras en la siguiente tabla:
+En esta sección analizaremos las diferentes muestras de malware que hemos obtenido mediante el nodo Kippo. Para tal fin se han empleado tanto herramientas manuales como automáticas: {\tt objdump}, {\tt gdb}, {\tt radare} y la API de VirusTotal, entre otros. Las muestras recogidas son muy similares aunque con ligeras variaciones, como la IP a la que se conectan. Podemos ver las características de las principales muestras en la tabla \ref{tab:car}:
 
-\begin{table}[H]
+\begin{table}
 \centering
-\begin{tabulary}{9.2cm}{| CCCCCCCC |}
-\hline 
-Muestra & Arq & SO  & Procesador & Tipo& Lenguaje & Depuración & Enlazado   \\ 
-\hline 
-Z & 32 bits & Linux & Intel 80386 & ELF & C++ & Sí & Estático\\ 
-\hline 
-Pomo & 32 bits & Linux  & Intel 80386 & ELF & C & No & Estático\\ 
-\hline 
-Udp26 & 32 bits & Linux & Intel 80386 & ELF & C++ & No & Estático\\ 
-\hline 
-Syn26 & 32 bits & Linux & Intel 80386 & ELF & C++ & Sí & Estático\\ 
-\hline 
-Wrt & 32 bits & Linux & MIPS R3000 & ELF & C++ & Sí & Estático\\ 
-\hline 
-Xudp & 32 bits & Linux & Intel 80386 & ELF & C & Sí & Estático\\ 
-\hline 
-Mips & 32 bits & Linux & MIPS R300 & ELF & C++ & Sí & Estático\\ 
-\hline 
-\end{tabulary}
-\caption{Características de las principales muestras}
+\begin{tabular}{cccccccc}
+malware & arquitectura & bits & SO & binario & lenguaje & desnudo & enlace \\
+\hline
+mips  & R3000 & 32 & Linux & ELF & C++ & no & estático \\
+pomo  & i386  & 32 & Linux & ELF & C   & si & estático \\
+syn26 & i386  & 32 & Linux & ELF & C++ & no & estático \\
+udp26 & i386  & 32 & Linux & ELF & C++ & si & estático \\
+wrt   & R3000 & 32 & Linux & ELF & C++ & no & estático \\
+xudp  & i386  & 32 & Linux & ELF & C   & no & estático \\
+z     & i386  & 32 & Linux & ELF & C++ & no & estático \\
+\end{tabular}
+\caption{Características de las principales muestras. Desnudo indica si la información de depuración ha sido eliminada.}
+\label{tab:car}
 \end{table}
+
 Hemos descubierto que las muestras pertenecen a un tipo muy particular de malware de origen chino, muy común y potencialmente dañino. Las muestras tienen funcionalidad de puerta trasera y abren un puerto elegido aleatoriamente para conectarse a una IP remota. Además, se ha descubierto que son capaces de realizar ataques de denegación de servicio a terceras máquinas una vez comprometido el ordnador atacado. Algo que nos ha llamado mucho la atención es que algunas muestras presentan información de depuración, por lo que nos hemos centrado en estas para poder obtener el máximo posible de información y de una manera más sencilla.
 
 Sospechamos que dichas muestras pueden pertenecer a la botnet \textit{BillGates}, calificada como de alto riesgo, a causa de las similitudes encontradas con otras muestras de malware de dicha botnet. Por ejemplo, un patrón en común es que todas ellas almacenan información en la biblioteca {\tt /usr/libamplify.so} de Linux. Para realizar el análisis hemos empleado técnicas de ingeniería inversa, tales como el análisis estático y dinámico, todo ello en un entorno aislado y controlado. Si el lector quiere profundizar en estas tácticas de análisis, puede consultar \cite{honeywell2004know}, donde se proporcionan ejemplos y procedimientos para este fin.
